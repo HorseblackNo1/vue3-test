@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <!-- <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -27,14 +27,37 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+  </div> -->
+  <div>
+    test {{count}}
+
+    <div>
+    <button @click="clickMe">clickMe</button></div>
+  
+    
   </div>
 </template>
 
 <script>
+import { ref } from 'vue'
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  setup(){
+    let count =ref(0)
+    let clickMe = ()=>{
+      count.value+=1
+    }
+    console.log("count",count.value)
+    return {
+      count,
+      clickMe
+    }
+  },
+  mounted(){
+    console.log(this.count)
   }
 }
 </script>
