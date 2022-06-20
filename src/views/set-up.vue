@@ -1,6 +1,8 @@
 <template>
   <div>
-    {{msg}}--{{ count }}--{{ state.count }}=={{author.name}}=={{publishedBooksMessage}}
+    {{ msg }}--{{ count }}--{{ state.count }}=={{ author.name }}=={{
+      publishedBooksMessage
+    }}
     <div>
       <button @click="clickMe">clickMe</button>
     </div>
@@ -15,21 +17,25 @@
       {{id}}--{{title}}--{{ message}}
       </li> -->
 
-        <!-- 解构 和 index -->
-      <li v-for="({ id, title, message},index) in items" :key="index">
-      {{id}}--{{title}}--{{ message}}---{{index}}
-      </li> 
+      <!-- 解构 和 index -->
+      <li v-for="({ id, title, message }, index) in items" :key="index">
+        {{ id }}--{{ title }}--{{ message }}---{{ index }}
+      </li>
       <!-- <li v-for="value of myObject" :key="value">
         {{value}}
       </li> -->
 
-        <li class="text" v-for="(value,key,index) of myObject" :key="index">
-        {{key}}----{{value}}
+      <li class="text" v-for="(value, key, index) of myObject" :key="index">
+        {{ key }}----{{ value }}
       </li>
     </ul>
     <!-- <span v-for="n in 10" :key="n">{{ n }}</span> -->
 
-    <setupSub :items="items" @getItme="getItme" ref="setupSubInstance"></setupSub>
+    <setupSub
+      :items="items"
+      @getItme="getItme"
+      ref="setupSubInstance"
+    ></setupSub>
   </div>
 </template>
 
@@ -145,391 +151,154 @@ function clickMe(){
     // const { msg } = toRefs(props)
 
     // console.log("toRefs",msg.value)
-    /*
-      import { createApp,reactive } from 'vue'
-      
-      const app = createApp({
-
-      })\
-
-      const app = createApp({
-        data(){
-          return { count:0 } 
-        }
-      })
-
-      app.config.errorHandleer = (err)=>{
-
-      }
-
-      v-html 渲染 html 标签元素
-      v-bind:id = "dynamicId"
-      :id = "dynamicId"
-      :disable = "isButtonDisabled"
-      {{ number +1 }}
-
-      {{ ok? 'yes':'no' }}
-      {{message.split('').reverse().join('')}}
-
-      <div :id="`list-${id}`"></div>
-
-      v-html
-      v-bind
-      v-for
-      v-on
-      v-solt
-
-      v-bind:href="xxx"
-      :href="xxx"
-      v-on:click="xxx"
-      @click="xxx"
-
-
-      <a v-bind:[attributeName] = "url"> </a>
-      <a :[attributeName] = "url"></a>
-
-      v-on:submit.prevent = "obSubmit"
-
-
-      app.component('TodoDeleteButoon',TodoDeleteButton)
-
-
-      import { 
-        createApp,
-        ref,
-        reactive,
-        nextTick,
-        computed,
-        onMounted,
-        onUpdated,
-        onUnmounted,
-        defineProps,
-        defineEmits,
-        } from 'vue'
-
-      function increment(){
-        state.count++
-
-        nextTick(()=>{
-
-        })
-      }
-
-      const obj = reactive({
-        nested:{ count:0 },
-        arr:['foo','bar']
-      })
-      function mutateDeeply(){
-        obj.nested.count++
-        obj.arr.push('baz')
-      }
-      const state = reactive({count:0})
-
-      setup(){
-        const state = reactive({
-          
-          return {
-            state
-          }
-
-        })
-      }
-      <div>{{state.count}}</div>
-
-
-
-      const raw={}
-
-      const proxy = reative(raw)
-
-      console.log(proxy == raw) //false
-
-      console.log(reactive(raw) === proxy) true
-      console.log(reactive(proxy) === proxy) true
-
-
-
-      <div :class="[ isActice ? acticeClass :'',errorClass ]"></div>
-
-      <div :class="[  { active:isActive },errorClass  ]"></div>
-
-      v-if
-      v-else
-
-      v-if
-      v-else-if
-      v-else
-
-      v-if
-      v-show
-
-      v-if v-for  v-if 的级别高
-
-      :class="{ active:isActive }"
-
-      :class ="{ active:isActive,'text-danger':hasError }"
-
-      :class="clasObject"
-
-      classObject:{
-        active:true,
-        'text-danger':false
-      }
-
-      :class="[activeClass,errorClass]"
-
-      三元表达式中class，可以使用三元表达式
-        :class="[ isActive?activeClass:'',errorClass ]"
-
-        css property 名 可以用驼峰 camelCase 或 短横线分隔（kebab-case，用引号括起来）
-        
-        :style="{ color:activeColor, fontSize:fontSize+'px' }"
-
-        :style="[baseStyles,overidingStyles]"
-        
-        :style ={ display:[ '-webkit-box','-ms-flexbox','flex' ] }
-
-        .stop
-        .prevent
-        .capture
-        .self
-        .once
-        .passive
-
-        @click.stop="doThis"
-        
-        @submit.prevent="onSubmit"
-
-        @click.stop.prevent="doThat"
-
-        @submit.prevent
-
-        @click.capture="doThis"
-
-        @click.self="doThat"
-
-        @keyup.enter="submit"
-
-        @keyup.page-down = onPageDown
-
-        .enter
-        .tab
-        .delete(删除和 退格)
-        .esc
-        .space
-        .up
-        .down
-        .left
-        .right
-
-        系统修饰键
-        .ctrl
-        .alt
-        .shift
-        .meta
-
-
-        鼠标按钮修饰符
-        .left
-        .right
-        .middle
-
-        const app = Vue.createApp({
-          data(){
-            return { count:4 }
-          }
-        })
-
-        const vm = app.mount('#app')
-        vm.$data.count
-        vm.count
-
-        vm.count = 5
-
-        vm.$data.count
-
-        vm.$ata.count = 6
-        vm.count
-
-
-        const app = Vue.createApp({
-          data(){
-            return { count:4 }
-          },
-          methods:{
-            increment(){
-              this.count++
-            }
-          }
-        })
-        const vm = app.mount('#app')
-
-        vm.increment()
-        <button @click="increment"> Up vote </button>
-
-      const items = ref( [ { message:'Foo' },{ message:'Bar' }  ] )
-      <li v-for="item in itmes">
-        {{item.message}}
-      </li>
-
-      v-on @
-
-      v-on:click = "xxx"
-      @click = "xxx"
-
-      Inline Handles
-      <button @click = "count++"></button>
-
-      <button @click="greet"></button>
-      function greet(event){
-        alert(`Hello ${name.value}`)
-        if(event){
-          alert(event.target.tagName)
-        }
-      }
-
-      .stop
-      .prevent
-      .self
-      .capturre
-      .once
-      .passive
-
-      <a @click.stop = "doThis"></a>
-      <from @submit.prevent = "onSubmit"></from>
-
-      <a @click.stop.prevent = "doThis"></a>
-      <from @submit.prevent ></from>
-
-      <a @click.self = "doThis"></a>
-
-      <div @click.capture="doThis"></div>
-      <div @click.once="doThis"></div>
-      <div @scroll.passive.once="doThis"></div>
-
-
-      key Modifiers
-
-      <input @keyup.enter="submit" />
-
-      <input @keyup/page-down="onPageDown" />
-
-      
-      key Aliases
-      
-      .enter
-      .tab
-      .delete
-      .esc
-      .space
-      .up
-      .down
-      .left
-      .right
-      .ctrl
-      .alt
-      .shift
-      .meta
-
-      <input @keyup.alt.enter="clear"/>
-
-      <div @click.ctrl="doSomething"></div>
-
-
-      defineProps,defineEmits
-
-      const props = defineProps({
-        foo:String
-      })
-
-      const emit = defineEmits(['change','delete'])
-
-
-
-
-      import { ref,onMounted } from 'vue'
-      
-      const input = ref(null)
-
-      onMounted(()=>{
-        input.value.focus()
-      })
-      <input ref="input" />
-
-
-      beforeCreate  =》 setup
-
-      creted =》 setup
-
-      beforeMount => onBeforeMount
-
-      mounted => onMounted
-
-      beforeUpdate => onBeforeUpdate
-
-      updated => onUpdateed
-
-      beforeUnmount => onBeforeUnmount
-
-      unmounted => onUnmounted
-
-      errorCapturred => onErrorCaptured
-
-      renderTracked => onRenderTeacked
-
-      renderTriggerd => onRenderTriggered
-      
-      activated => onActivated
-      deactiveated => onDeactivated
-
-
-    */
-    //单个参数 解构
-    // const msg = toRef(props,'msg')
-    //  console.log("toRefddd",msg.value)
-
-    // let count =ref(0)
-    // // let clickMe = ()=>{
-    // //   count.value+=1
-    // // }
-    // console.log("count",count.value)
-
-    // let state = reactive({
-    //   sss:20
-    // })
-
-    // let clickMe= ()=>{
-    //   state.sss+=1
-
-    //   console.log("state:",state)
-    // }
-
     
+/*
+  export default {
+    setup(){
+      onMounted(()=>{
+        console.log('Component is mounted')
+      })
+    }
+  }
 
-    // const time = ref(1);
+  beforeCreate       not neeed
+  created            not need
+  beforeMount        onBeforeMount
+  mounted            onMounted
+  beforeUpdate       onBeforeUpdate
+  updated            onUpdated
+  beforeUnmount      onBeforeUnmount
+  unmounted          onUnmounted
+  errorCaptured      onErrorCaputred
+  renderTriggered    onRenderTriggered
+  activated          onActivated
+  deactivated        onDecativated
 
-    // const plusTTime = computed(()=>{ time.value+1 })
+  使用 provoid  先从 vue 显示导入 provide方法 能够调用provide 来定义每个property
+  
+  provide 函数允许通过两个 参数定义 property
 
-    //  console.log("plusTTime",plusTTime)
+  1 name string 类型
+  2 value
+  
+  import { provide } from 'vue'
+  import MyMarker form './myMarker.vue'
 
-  //   return {
-  //     count,
-  //     clickMe,
-  //     state,
-  //   }
-  // },
-//   mounted(){
-//     console.log(this.count)
-//      console.log(this.msg)
-//   }
-// }
+  exprot default {
+
+    components:{
+      MyMarker
+    },
+
+    setup(){
+      provide('location','North Pole')
+      provide('geolocation',{
+        longitude:90,
+        latitude:135
+      })
+    }
+
+  }
+
+
+  inject 需要从 vue 显示导入 倒入以后可以调用它来定义暴露给我们的组件方式
+  inject 函数有两参数 
+  inject 的property 的 name
+  默认值 可选
+
+  import { inject } from 'vue'
+
+  export defalut {
+    setup(){
+
+      const userLocation = inject('loaction','The Universe')
+      const userGeoloaction = inject('geoloaction')
+
+      return {
+        userLocation,
+        userGeolocation
+
+      }
+    }
+  }
+
+  响应性
+  添加响应性
+  为增加 provide 值 和 inject 值 之间的响应性，在provide 值使用 ref 或 reactive
+
+  import { provide,reactive,ref } from 'vue'
+  import MyMarker form './MyMarker.vue'
+
+  setup(){
+
+    const location = ref('North Pole')
+    const geolocation = reactive({
+      longtitude:90,
+      latitude:135
+    })
+
+    provide('location',loaction)
+    provide('geolocation',geolocation)
+  }
+
+  import { provid,reactive,redonly,ref } from 'vue'
+
+  setup(){
+    const loaction = ref('North Pole')
+    const geolocation = reactive({
+      longitude:90,
+      latitude:135
+    })
+
+    const updateLoaction=()=>{
+      location.value="South Pole"
+    }
+
+    provide('location',readonly(location))
+    provide('geolocation',redonly(geolocation))
+    provide('updateLocation',updadteLocation)
+
+  }
+
+  <div ref="root">this is a root element</div>
+
+  import { ref,onMounted } from 'vue'
+
+  exprot default{
+    setup(){
+      
+      onMounted(()=>{
+        console.log(root.value)
+      })
+
+      return { root }
+
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+
+
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.text{
-  color: v-bind('theme.color');
-  background: v-bind('theme.background')
+.text {
+  color: v-bind("theme.color");
+  background: v-bind("theme.background");
 }
 h3 {
   margin: 40px 0 0;
