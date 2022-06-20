@@ -251,7 +251,7 @@ function clickMe(){
     })
 
     const updateLoaction=()=>{
-      location.value="South Pole"
+      location.value="South Pole" 
     }
 
     provide('location',readonly(location))
